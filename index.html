@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- here content delivery network and here react is hosted -->
+    <title>React tutorial</title>
+  </head>
+  <body>
+    <div id="root">
+      <!-- this will be replaced by react in app.js (root.render()) -->
+      <h1>Hello First tutorial from HTML</h1>
+    </div>
+    <script>
+      const heading = document.createElement("h1");
+      heading.innerHTML = "hello world From JS";
+      const root = document.getElementById("root");
+      root.appendChild(heading);
+    </script>
+    <!-- react -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <!-- react DOM -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
