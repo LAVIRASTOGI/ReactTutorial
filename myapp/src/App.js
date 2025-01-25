@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import AgeComponent from "./AgeComponent";
+import EventHandler from "./EventHandler";
 
 export default function App() {
   let [age, setAge] = useState(30);
   const [obj, setObj] = useState({ name: "lavi", age: 30 });
   const [arr, setArr] = useState([1, 2, 3, 4]);
 
-  const clickHandler = () => {
+  const clickHandler = (name) => {
     // setAge(age + 1);
     // setObj((obj.name = "labi"));
     // setObj({ ...obj, age: age + 1, name: "lllll" });
@@ -21,16 +22,21 @@ export default function App() {
     // setAge((prev) => prev + 1);
     // setAge((prev) => prev + 1);
     // setAge((prev) => prev + 1);
-    setAge((prev) => prev + 1);
-    setArr(arr.push(1, 2, 6));
-    setObj({ ...obj, age: age + 1, name: "lllll" });
+    console.log(name, "name from parent");
+    // setAge((prev) => prev + 1);
+    // setArr(arr.push(1, 2, 6));
+    // setObj({ ...obj, age: age + 1, name: "lllll" });
   };
   return (
     <div>
-      <AgeComponent age={age} obj={obj} clickHandler={clickHandler} />
-      <h1>{age}</h1>
+      {/* Props */}
+      {/* <AgeComponent age={age} obj={obj} clickHandler={clickHandler} />
+      <h1>{age}</h1> */}
       {/* <h2>{arr}</h2> */}
-      <button onClick={clickHandler}> Click</button>
+      <button onClick={() => clickHandler()}> Click</button>
+
+      {/* event handlers */}
+      <EventHandler clickHandler2={(name) => clickHandler(name)} />
     </div>
   );
 }
