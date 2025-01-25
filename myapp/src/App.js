@@ -27,8 +27,9 @@ export default function App() {
   };
   return (
     <div>
-      {/* <AgeComponent age={age} /> */}
+      <AgeComponent age={age} obj={obj} clickHandler={clickHandler} />
       <h1>{age}</h1>
+      {/* <h2>{arr}</h2> */}
       <button onClick={clickHandler}> Click</button>
     </div>
   );
