@@ -1,0 +1,102 @@
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.game-title {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell:hover {
+  background-color: #f8f9fa;
+}
+
+.cell span {
+  font-size: 40px;
+  line-height: 40px;
+}
+
+.x-mark {
+  color: #e74c3c;
+}
+
+.o-mark {
+  color: #3498db;
+}
+
+.winner {
+  background-color: rgba(46, 204, 113, 0.2);
+  border-color: #2ecc71;
+}
+
+.winner span {
+  color: #27ae60;
+}
+
+.winnerContainer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.winnerContainer h2 {
+  color: #2ecc71;
+  font-size: 1.5rem;
+}
+
+.buttonRestart {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buttonRestart:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+  .cell {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  .cell span {
+    font-size: 32px;
+    line-height: 32px;
+  }
+}

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import AgeComponent from "./AgeComponent";
 import EventHandler from "./EventHandler";
+import DynamicContent from "./DynamicContent";
+import PropDrillExample from "./PropDrillExample";
+import TicTacToe from "./TicTacToe/TicTacToe";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -37,6 +40,17 @@ export default function App() {
 
       {/* event handlers */}
       <EventHandler clickHandler2={(name) => clickHandler(name)} />
+
+      {/* prop drilling */}
+      <PropDrillExample />
+
+      {/* display dymanic list content  */}
+      <DynamicContent />
+
+      {/* to do application  */}
+
+      {/* tic tac toe application */}
+      <TicTacToe />
     </div>
   );
 }
