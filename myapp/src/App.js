@@ -4,6 +4,7 @@ import EventHandler from "./EventHandler";
 import DynamicContent from "./DynamicContent";
 import PropDrillExample from "./PropDrillExample";
 import TicTacToe from "./TicTacToe/TicTacToe";
+import TodoApplication from "./todoApp/TodoAppliation";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -48,6 +49,7 @@ export default function App() {
       <DynamicContent />
 
       {/* to do application  */}
+      <TodoApplication />
 
       {/* tic tac toe application */}
       <TicTacToe />
