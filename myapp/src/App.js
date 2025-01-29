@@ -5,6 +5,9 @@ import DynamicContent from "./DynamicContent";
 import PropDrillExample from "./PropDrillExample";
 import TicTacToe from "./TicTacToe/TicTacToe";
 import TodoApplication from "./todoApp/TodoAppliation";
+import EventPropagation from "./EventPropagation";
+import DOMSelector from "./DOMSelector";
+import Statelifting from "./Statelifting";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -31,28 +34,38 @@ export default function App() {
     // setArr(arr.push(1, 2, 6));
     // setObj({ ...obj, age: age + 1, name: "lllll" });
   };
+
   return (
     <div>
       {/* Props */}
       {/* <AgeComponent age={age} obj={obj} clickHandler={clickHandler} />
       <h1>{age}</h1> */}
       {/* <h2>{arr}</h2> */}
-      <button onClick={() => clickHandler()}> Click</button>
+      {/* <button onClick={() => clickHandler()}> Click</button> */}
 
       {/* event handlers */}
-      <EventHandler clickHandler2={(name) => clickHandler(name)} />
+      {/* <EventHandler clickHandler2={(name) => clickHandler(name)} /> */}
+
+      {/* event propagation  */}
+      {/* <EventPropagation /> */}
+
+      {/* query selector */}
+      <DOMSelector />
+
+      {/* state lifting */}
+      <Statelifting />
 
       {/* prop drilling */}
-      <PropDrillExample />
+      {/* <PropDrillExample /> */}
 
       {/* display dymanic list content  */}
-      <DynamicContent />
+      {/* <DynamicContent /> */}
 
       {/* to do application  */}
-      <TodoApplication />
+      {/* <TodoApplication /> */}
 
       {/* tic tac toe application */}
-      <TicTacToe />
+      {/* <TicTacToe /> */}
     </div>
   );
 }
