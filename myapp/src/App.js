@@ -10,6 +10,7 @@ import DOMSelector from "./DOMSelector";
 import Statelifting from "./Statelifting";
 import Seconduseeffect from "./ReactHooks/Seconduseeffect";
 import FirstUseState from "./ReactHooks/FirstUseState";
+import ThirdUseLayoutEffect from "./ReactHooks/ThirdUseLayoutEffect";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -52,10 +53,10 @@ export default function App() {
       {/* <EventPropagation /> */}
 
       {/* query selector */}
-      <DOMSelector />
+      {/* <DOMSelector /> */}
 
       {/* state lifting */}
-      <Statelifting />
+      {/* <Statelifting /> */}
 
       {/* prop drilling */}
       {/* <PropDrillExample /> */}
@@ -70,9 +71,13 @@ export default function App() {
       {/* <TicTacToe /> */}
 
       {/* react hooks */}
+      {/* use state */}
+      {/* <FirstUseState /> */}
       {/* useEffect */}
-      <FirstUseState />
-      <Seconduseeffect />
+      {/* <Seconduseeffect /> */}
+
+      {/* uselayouteffect */}
+      <ThirdUseLayoutEffect />
     </div>
   );
 }
