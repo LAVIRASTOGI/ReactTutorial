@@ -8,6 +8,8 @@ import TodoApplication from "./todoApp/TodoAppliation";
 import EventPropagation from "./EventPropagation";
 import DOMSelector from "./DOMSelector";
 import Statelifting from "./Statelifting";
+import Seconduseeffect from "./ReactHooks/Seconduseeffect";
+import FirstUseState from "./ReactHooks/FirstUseState";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -66,6 +68,11 @@ export default function App() {
 
       {/* tic tac toe application */}
       {/* <TicTacToe /> */}
+
+      {/* react hooks */}
+      {/* useEffect */}
+      <FirstUseState />
+      <Seconduseeffect />
     </div>
   );
 }
