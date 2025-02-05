@@ -11,6 +11,7 @@ import Statelifting from "./Statelifting";
 import Seconduseeffect from "./ReactHooks/Seconduseeffect";
 import FirstUseState from "./ReactHooks/FirstUseState";
 import ThirdUseLayoutEffect from "./ReactHooks/ThirdUseLayoutEffect";
+import TODOAPP from "./TODOAPP";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -40,6 +41,7 @@ export default function App() {
 
   return (
     <div>
+      <TODOAPP />
       {/* Props */}
       {/* <AgeComponent age={age} obj={obj} clickHandler={clickHandler} />
       <h1>{age}</h1> */}
@@ -77,7 +79,7 @@ export default function App() {
       {/* <Seconduseeffect /> */}
 
       {/* uselayouteffect */}
-      <ThirdUseLayoutEffect />
+      {/* <ThirdUseLayoutEffect /> */}
     </div>
   );
 }
