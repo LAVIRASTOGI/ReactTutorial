@@ -13,6 +13,7 @@ import FirstUseState from "./ReactHooks/FirstUseState";
 import ThirdUseLayoutEffect from "./ReactHooks/ThirdUseLayoutEffect";
 import TODOAPP from "./TODOAPP";
 import FourthSecondExampleUseReducer from "./ReactHooks/FourthSecondExampleUseReducer";
+import FifthUseId from "./ReactHooks/FifthUseId";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -83,7 +84,10 @@ export default function App() {
       {/* <ThirdUseLayoutEffect /> */}
 
       {/* useReducer */}
-      <FourthSecondExampleUseReducer />
+      {/* <FourthSecondExampleUseReducer /> */}
+
+      {/* useId */}
+      <FifthUseId />
     </div>
   );
 }
