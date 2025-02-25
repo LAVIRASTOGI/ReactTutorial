@@ -43,7 +43,7 @@ export default function App() {
 
   return (
     <div>
-      {/* <TODOAPP /> */}
+      <TODOAPP />
       {/* Props */}
       {/* <AgeComponent age={age} obj={obj} clickHandler={clickHandler} />
       <h1>{age}</h1> */}
@@ -69,7 +69,7 @@ export default function App() {
       {/* <DynamicContent /> */}
 
       {/* to do application  */}
-      {/* <TodoApplication /> */}
+      <TodoApplication />
 
       {/* tic tac toe application */}
       {/* <TicTacToe /> */}
@@ -87,7 +87,7 @@ export default function App() {
       {/* <FourthSecondExampleUseReducer /> */}
 
       {/* useId */}
-      <FifthUseId />
+      {/* <FifthUseId /> */}
     </div>
   );
 }

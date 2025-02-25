@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-
+import styles from "./style.module.css";
 function TODOAPP() {
   const [task, setTask] = useState("");
   const [list, setList] = useState([]);
@@ -55,7 +55,7 @@ function TODOAPP() {
     );
   };
   return (
-    <>
+    <div className={styles["todo-container"]}>
       <h1>TODOAPP</h1>
       <input
         type="text"
@@ -86,7 +86,7 @@ function TODOAPP() {
       ) : (
         <h1>No task</h1>
       )}
-    </>
+    </div>
   );
 }
 
