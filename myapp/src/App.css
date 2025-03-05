@@ -40,3 +40,13 @@
 .mainContainer .heading {
   color: #61dafb;
 }
+.slider {
+  text-align: center !important;
+  /* width: 30% !important; */
+  background: #61dafb !important;
+}
+.slider-container {
+  width: 30% !important;
+  margin: auto;
+  margin-top: 5rem;
+}
