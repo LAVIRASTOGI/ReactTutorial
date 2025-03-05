@@ -1,7 +1,7 @@
-import { use, useState } from "react";
+import { forwardRef, use, useState } from "react";
 import { useEffect } from "react";
 
-function AgeComponent({ age, obj, clickHandler }) {
+const AgeComponent = forwardRef(({ name }, ref) => {
   //iniatal - 34
   // const [age1, setAge1] = useState(Number(props.age));
 
@@ -11,14 +11,10 @@ function AgeComponent({ age, obj, clickHandler }) {
 
   return (
     <div>
-      {/* <p>My age is {age1}</p> */}
-      {/* <p>My age is {props.age}</p> */}
-
-      <h1>{age}</h1>
-      <h1>{obj.name}</h1>
-      <h1>{obj.age} </h1>
-      <button onClick={clickHandler}> Click</button>
+      <h1>helllo - {name}</h1>
+      <input type="text" placeholder="enter Name" ref={ref} />
     </div>
   );
-}
+});
+
 export default AgeComponent;
