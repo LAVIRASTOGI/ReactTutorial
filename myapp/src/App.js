@@ -16,6 +16,7 @@ import FourthSecondExampleUseReducer from "./ReactHooks/FourthSecondExampleUseRe
 import FifthUseId from "./ReactHooks/FifthUseId";
 import ThirdpartyLibararyuseRef from "./ReactHooks/ThirdpartyLibararyuseRef";
 import "./App.css";
+import FowardRefexample from "./ReactHooks/FowardRefexample";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -93,6 +94,7 @@ export default function App() {
 
       {/* use Ref */}
       <ThirdpartyLibararyuseRef />
+      <FowardRefexample />
     </div>
   );
 }
