@@ -8,10 +8,6 @@ function FowardRefexample() {
     inputRef.current.focus();
   }, []);
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
-
   return (
     <>
       <div>foward Ref Example</div>
