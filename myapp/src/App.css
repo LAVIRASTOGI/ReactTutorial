@@ -50,3 +50,10 @@
   margin: auto;
   margin-top: 5rem;
 }
+
+.dark {
+  background: #282c34;
+}
+.dark h1 {
+  color: #fff;
+}

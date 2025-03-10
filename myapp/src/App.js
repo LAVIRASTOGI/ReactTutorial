@@ -17,6 +17,11 @@ import FifthUseId from "./ReactHooks/FifthUseId";
 import ThirdpartyLibararyuseRef from "./ReactHooks/ThirdpartyLibararyuseRef";
 import "./App.css";
 import FowardRefexample from "./ReactHooks/FowardRefexample";
+import Example1Provider from "./ReactHooks/ContexAPI/Example1";
+import CounterExample1 from "./ReactHooks/ContexAPI/CounterExample1";
+import ThemeContextProvider from "./ReactHooks/ContexAPI/ThemeContext";
+import AuthContextProvider from "./ReactHooks/AuthenticationContext";
+import CustomHookExample from "./ReactHooks/CustomHook/CustomHookExample";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -93,8 +98,21 @@ export default function App() {
       {/* <FifthUseId /> */}
 
       {/* use Ref */}
-      <ThirdpartyLibararyuseRef />
-      <FowardRefexample />
+      {/* <ThirdpartyLibararyuseRef />
+      <FowardRefexample /> */}
+
+      {/* Context API */}
+      {/* <AuthContextProvider>
+        <ThemeContextProvider>
+          <Example1Provider>
+            <CounterExample1 />
+          </Example1Provider>
+        </ThemeContextProvider>
+      </AuthContextProvider> */}
+
+      {/* custom Hook */}
+
+      <CustomHookExample />
     </div>
   );
 }
