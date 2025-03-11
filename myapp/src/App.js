@@ -23,6 +23,7 @@ import ThemeContextProvider from "./ReactHooks/ContexAPI/ThemeContext";
 import AuthContextProvider from "./ReactHooks/AuthenticationContext";
 import CustomHookExample from "./ReactHooks/CustomHook/CustomHookExample";
 import Example from "./ReactHooks/useCallbackHook/Example";
+import ExampleuseMemo from "./ReactHooks/useMemoHook/ExampleuseMemo";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -116,7 +117,10 @@ export default function App() {
       {/* <CustomHookExample /> */}
 
       {/* useCallBack */}
-      <Example />
+      {/* <Example /> */}
+
+      {/* useMemo */}
+      <ExampleuseMemo />
     </div>
   );
 }
