@@ -22,6 +22,7 @@ import CounterExample1 from "./ReactHooks/ContexAPI/CounterExample1";
 import ThemeContextProvider from "./ReactHooks/ContexAPI/ThemeContext";
 import AuthContextProvider from "./ReactHooks/AuthenticationContext";
 import CustomHookExample from "./ReactHooks/CustomHook/CustomHookExample";
+import Example from "./ReactHooks/useCallbackHook/Example";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -112,7 +113,10 @@ export default function App() {
 
       {/* custom Hook */}
 
-      <CustomHookExample />
+      {/* <CustomHookExample /> */}
+
+      {/* useCallBack */}
+      <Example />
     </div>
   );
 }
