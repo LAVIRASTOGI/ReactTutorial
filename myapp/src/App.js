@@ -25,6 +25,8 @@ import CustomHookExample from "./ReactHooks/CustomHook/CustomHookExample";
 import Example from "./ReactHooks/useCallbackHook/Example";
 import ExampleuseMemo from "./ReactHooks/useMemoHook/ExampleuseMemo";
 import ReactMemoExample from "./ReactHooks/ReactMemo/ReactMemoExample";
+import HOCexample from "./ReactHooks/HOC/HOCexample";
+import AUTHExample from "./ReactHooks/HOC/AUTHExample";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -124,7 +126,11 @@ export default function App() {
       {/* <ExampleuseMemo /> */}
 
       {/* Recat.memo - prevent rerendering */}
-      <ReactMemoExample />
+      {/* <ReactMemoExample /> */}
+
+      {/* HOC */}
+      <HOCexample message="hello" addtionalProp="world" />
+      <AUTHExample />
     </div>
   );
 }
