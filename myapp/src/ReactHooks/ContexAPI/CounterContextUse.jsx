@@ -1,16 +1,17 @@
 import React, { useContext } from "react";
 import { CounterContext } from "./CounterContext";
-import { AuthContext } from "./AuthenticationContext";
+import { useAuthContext2 } from "./AuthenticationContext";
 
 function CounterContextUse() {
-  const { count, increment, decrement } = useContext(CounterContext);
-  const { user } = useContext(AuthContext);
+  // const { count, increment, decrement } = useContext(CounterContext);
+  const { user } = useAuthContext2();
+
   return (
     <>
-      <h1>Count:{count}</h1>
+      {/* <h1>Count:{count}</h1> */}
       <h2>user:{user}</h2>
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
+      {/* <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button> */}
     </>
   );
 }

@@ -30,6 +30,8 @@ import AUTHExample from "./ReactHooks/HOC/AUTHExample";
 import { CounterProvider } from "./ReactHooks/ContexAPI/CounterContext";
 import CounterContextUse from "./ReactHooks/ContexAPI/CounterContextUse";
 import LoginComponent from "./ReactHooks/ContexAPI/LoginComponent";
+import ExampleCustoomhook from "./ReactHooks/CustomHook/ExampleCustoomhook";
+import CustomHookExample2 from "./ReactHooks/CustomHook/CustomHookExample2";
 
 export default function App() {
   let [age, setAge] = useState(30);
@@ -134,11 +136,16 @@ export default function App() {
       {/* HOC */}
       {/* <HOCexample message="hello" addtionalProp="world" />
       <AUTHExample /> */}
-      <LoginComponent/>
-
+      {/* <LoginComponent/>
+<LoginComponent/>
       <CounterProvider>
         <CounterContextUse />
-      </CounterProvider>
+      </CounterProvider> */}
+      {/* <ExampleCustoomhook />
+      <CounterContextUse />
+      <LoginComponent /> */}
+      <CustomHookExample />
+      <CustomHookExample2 />
     </div>
   );
 }

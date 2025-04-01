@@ -1,5 +1,4 @@
 import React from "react";
-import withAuth from "./withAuth";
 
 function AUTHExample({ user }) {
   return (
@@ -10,4 +9,4 @@ function AUTHExample({ user }) {
   );
 }
 
-export default withAuth(AUTHExample);
+export default AUTHExample;
