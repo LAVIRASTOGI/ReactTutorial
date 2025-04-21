@@ -1,0 +1,20 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.dark {
+  background: black;
+  color: white;
+}
+.light {
+  background: white;
+  color: black;
+}
+.notification {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+}
