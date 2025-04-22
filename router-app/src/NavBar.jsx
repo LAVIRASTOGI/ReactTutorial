@@ -1,31 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
-function NavBar() {
-  const user = localStorage.getItem("user");
-
-  const Login = () => {
-    localStorage.setItem("user", "lavi");
-  };
-  const Logout = () => {
-    localStorage.clear();
-  };
-
+function NavBar({ isLoggedIn, onLogout }) {
   return (
     <header>
-      <h1>My Website</h1>
-      {user && (
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/user">User</Link>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
-        </nav>
-      )}
-      {user ? (
-        <button onClick={Logout}>Logout</button>
+      <h1>
+        <Link to="/">User Portal</Link>
+      </h1>
+
+      <nav>
+        <NavLink to="/" end>
+          Home
+        </NavLink>
+        {isLoggedIn && (
+          <>
+            <NavLink to="/users">Users</NavLink>
+            <NavLink to="/about">About</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/search">Search</NavLink>
+          </>
+        )}
+      </nav>
+
+      {isLoggedIn ? (
+        <button onClick={onLogout}>Logout</button>
       ) : (
-        <button onClick={Login}>LogIn</button>
+        <Link to="/login">
+          <button>Login</button>
+        </Link>
       )}
     </header>
   );
