@@ -13,6 +13,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Search from "./Search";
 import Layout from "./Layout";
 import NavBar from "./NavBar";
+import SearchWithParams from "./SearchWithParams";
 
 // Import the new product components
 import Products from "./Products";
@@ -54,6 +55,9 @@ function App() {
         element={<Layout isLoggedIn={isLoggedIn} onLogout={handleLogout} />}
       > */}
         <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} />} />
+
+        {/* Query parameters example - publicly accessible */}
+        <Route path="search-params" element={<SearchWithParams />} />
 
         {/* Products routes with nested structure */}
         <Route path="products" element={<Products />}>

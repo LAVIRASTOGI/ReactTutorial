@@ -65,6 +65,8 @@ function NavBar({ isLoggedIn, onLogout }) {
             </NavLink>
           </div>
         </div>
+        {/* Query Parameters Example - accessible to all users */}
+        <NavLink to="/search-params">Query Params</NavLink>
         {isLoggedIn && (
           <>
             <NavLink to="/users">Users</NavLink>
