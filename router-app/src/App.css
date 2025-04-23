@@ -300,6 +300,28 @@ main {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
+.redirect-notice {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: #eff6ff;
+  border-left: 3px solid #3b82f6;
+  color: #1e40af;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.alert {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.alert-error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-left: 3px solid #ef4444;
+}
+
 /* Landing Page */
 .landing-hero {
   text-align: center;
@@ -357,5 +379,17 @@ main {
     background-color: #374151;
     border-color: #4b5563;
     color: #e5e7eb;
+  }
+
+  .redirect-notice {
+    background-color: #1e3a8a;
+    border-left-color: #60a5fa;
+    color: #e0f2fe;
+  }
+
+  .alert-error {
+    background-color: #7f1d1d;
+    color: #fecaca;
+    border-left-color: #f87171;
   }
 }
