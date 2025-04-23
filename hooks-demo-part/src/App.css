@@ -420,6 +420,234 @@ code {
   color: var(--error);
 }
 
+/* Reducer Example Styles */
+.reducer-example {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.demo-section.dark .reducer-example {
+  border-color: var(--gray-600);
+}
+
+.todos-list {
+  list-style: none;
+  margin: 1rem 0;
+}
+
+.todos-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--border-radius);
+  margin-bottom: 0.5rem;
+}
+
+.demo-section.dark .todos-list li {
+  border-color: var(--gray-600);
+}
+
+.todos-list li.completed .todo-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.todo-text {
+  cursor: pointer;
+  flex: 1;
+}
+
+.clear-button {
+  margin-top: 1rem;
+  background-color: var(--error);
+  color: white;
+}
+
+.no-todos {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--gray-100);
+  border-radius: var(--border-radius);
+  color: var(--gray-600);
+}
+
+.demo-section.dark .no-todos {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--gray-300);
+}
+
+/* Callback Example Styles */
+.callback-example {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.demo-section.dark .callback-example {
+  border-color: var(--gray-600);
+}
+
+.callback-button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.callback-button:hover {
+  background-color: var(--primary-hover);
+}
+
+.items-list {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0.5rem;
+}
+
+.items-list li {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background-color: var(--gray-100);
+  border-radius: var(--border-radius);
+}
+
+.demo-section.dark .items-list li {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Memo Example Styles */
+.memo-example {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.demo-section.dark .memo-example {
+  border-color: var(--gray-600);
+}
+
+.input-area {
+  margin-bottom: 1rem;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filtered-results {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--gray-100);
+  border-radius: var(--border-radius);
+}
+
+.demo-section.dark .filtered-results {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.user-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--gray-100);
+  border-radius: var(--border-radius);
+  overflow: auto;
+}
+
+.demo-section.dark .user-info {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.user-info pre {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+/* React.memo Demo Styles */
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.instruction {
+  font-style: italic;
+  margin-bottom: 1rem;
+  color: var(--gray-600);
+}
+
+.demo-section.dark .instruction {
+  color: var(--gray-300);
+}
+
+.component-containers {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.component-example {
+  flex: 1;
+  min-width: 250px;
+  margin-bottom: 1rem;
+}
+
+.demo-component {
+  padding: 1rem;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--border-radius);
+  background-color: var(--gray-100);
+}
+
+.demo-section.dark .demo-component {
+  border-color: var(--gray-600);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.memo-explanation {
+  padding: 1.5rem;
+  background-color: var(--gray-100);
+  border-radius: var(--border-radius);
+}
+
+.demo-section.dark .memo-explanation {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.code-explanation {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--gray-100);
+  border-radius: var(--border-radius);
+}
+
+.demo-section.dark .code-explanation {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.code-sample {
+  margin: 1rem 0;
+  background-color: var(--gray-800);
+  border-radius: var(--border-radius);
+  overflow: auto;
+}
+
+.code-sample pre {
+  padding: 1rem;
+  margin: 0;
+  color: white;
+  font-size: 0.875rem;
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .sidebar {

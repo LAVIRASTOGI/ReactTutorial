@@ -7,6 +7,10 @@ function Sidebar({ activeSection, setActiveSection }) {
     { id: "useState", title: "useState Hook" },
     { id: "useEffect", title: "useEffect Hook" },
     { id: "useRef", title: "useRef Hook" },
+    { id: "useReducer", title: "useReducer Hook" },
+    { id: "useCallback", title: "useCallback Hook" },
+    { id: "useMemo", title: "useMemo Hook" },
+    { id: "reactMemo", title: "React.memo" },
     { id: "customHooks", title: "Custom Hooks" },
     { id: "contextApi", title: "Context API" },
   ];
