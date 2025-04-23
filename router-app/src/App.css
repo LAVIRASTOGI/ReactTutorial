@@ -28,11 +28,19 @@ header h1 {
 header nav {
   display: flex;
   gap: 1.5rem;
+  align-items: center;
 }
 
 header nav a {
   position: relative;
   padding: 0.5rem 0;
+  text-decoration: none;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+header nav a:hover {
+  color: #3b82f6;
 }
 
 header nav a:after {
@@ -50,8 +58,128 @@ header nav a:hover:after {
   width: 100%;
 }
 
+header nav a.active {
+  color: #3b82f6;
+}
+
 header nav a.active:after {
   width: 100%;
+}
+
+/* Dropdown Menu Styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+}
+
+.dropdown > a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.dropdown > a:after {
+  width: 0; /* Reset width for dropdown parent */
+}
+
+/* Active class for dropdown trigger */
+.dropdown > a.dropdown-active {
+  color: #3b82f6;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  margin-top: 0.75rem;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.dropdown-content.show {
+  display: block;
+  opacity: 1;
+}
+
+.dropdown-content:before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: -3px -3px 5px rgba(0, 0, 0, 0.04);
+}
+
+.dropdown-content a {
+  color: #4b5563;
+  padding: 0.75rem 1.25rem;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+  text-align: left;
+  font-weight: normal;
+}
+
+.dropdown-content a:hover {
+  background-color: #f3f4f6;
+}
+
+.dropdown-content a:after {
+  display: none;
+}
+
+.dropdown-content a.active {
+  color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+/* Remove hover functionality since we're using JavaScript */
+/* .dropdown:hover .dropdown-content {
+  display: block;
+} */
+
+/* Dark mode support for dropdown */
+@media (prefers-color-scheme: dark) {
+  header {
+    background-color: #1f2937;
+  }
+
+  header nav a {
+    color: #e5e7eb;
+  }
+
+  .dropdown-content {
+    background-color: #1f2937;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+  }
+
+  .dropdown-content:before {
+    background-color: #1f2937;
+  }
+
+  .dropdown-content a {
+    color: #e5e7eb;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #374151;
+  }
+
+  .dropdown-content a.active {
+    background-color: #1e3a8a;
+  }
 }
 
 /* Main Content */

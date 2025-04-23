@@ -5,7 +5,7 @@ function LandingPage({ isLoggedIn }) {
   return (
     <div>
       <section className="landing-hero">
-        <h1>Welcome to User Portal</h1>
+        <h1>Welcome to Portal</h1>
         <p>
           A modern application for managing user profiles and information.
           Explore our user database with easy navigation and search
