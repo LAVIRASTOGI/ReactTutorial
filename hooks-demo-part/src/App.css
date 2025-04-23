@@ -1,0 +1,463 @@
+/* Base Styles */
+:root {
+  --bg-light: #f8f9fa;
+  --bg-dark: #121212;
+  --text-light: #333;
+  --text-dark: #e5e7eb;
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-dark: #3b82f6;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-600: #4b5563;
+  --gray-800: #1f2937;
+  --success: #10b981;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  --sidebar-width: 250px;
+  --header-height: 60px;
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+pre,
+code {
+  font-family: "Fira Code", "Courier New", Courier, monospace;
+}
+
+/* App Layout */
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: var(--sidebar-width);
+  padding: 1.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+.sidebar.dark {
+  background-color: var(--gray-800);
+  color: var(--text-dark);
+  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.sidebar.dark .sidebar-header {
+  border-color: var(--gray-600);
+}
+
+.sidebar-header h1 {
+  font-size: 1.25rem;
+  color: var(--primary-color);
+}
+
+.sidebar.dark .sidebar-header h1 {
+  color: var(--primary-dark);
+}
+
+.theme-toggle {
+  background: none;
+  padding: 0.25rem;
+  font-size: 1.25rem;
+  border-radius: 50%;
+}
+
+.sidebar-nav {
+  flex-grow: 1;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+}
+
+.sidebar-nav button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background: none;
+  color: inherit;
+  border-radius: var(--border-radius);
+  font-weight: 400;
+}
+
+.sidebar-nav button:hover {
+  background-color: var(--gray-100);
+}
+
+.sidebar.dark .sidebar-nav button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav button.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.sidebar.dark .sidebar-nav button.active {
+  background-color: var(--primary-dark);
+}
+
+.sidebar-footer {
+  font-size: 0.75rem;
+  color: var(--gray-600);
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray-200);
+  text-align: center;
+}
+
+.sidebar.dark .sidebar-footer {
+  color: var(--gray-300);
+  border-color: var(--gray-600);
+}
+
+/* Main Content Styles */
+.content {
+  margin-left: var(--sidebar-width);
+  padding: 2rem;
+  flex: 1;
+}
+
+/* Demo Section Styles */
+.demo-section {
+  max-width: 800px;
+  padding: 2rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.demo-section.dark {
+  background-color: var(--gray-800);
+  color: var(--text-dark);
+}
+
+.demo-section h2 {
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.demo-section.dark h2 {
+  color: var(--primary-dark);
+}
+
+.demo-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.demo-section h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.demo-section .note {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.demo-section.dark .note {
+  color: var(--gray-300);
+}
+
+/* Effect, Ref and Hook Examples */
+.effect-example,
+.ref-example,
+.hook-demo,
+.context-example {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.demo-section.dark .effect-example,
+.demo-section.dark .ref-example,
+.demo-section.dark .hook-demo,
+.demo-section.dark .context-example {
+  border-color: var(--gray-600);
+}
+
+.effect-example:last-child,
+.ref-example:last-child,
+.hook-demo:last-child,
+.context-example:last-child {
+  border-bottom: none;
+}
+
+/* Button Styles */
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.button-group button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.button-group button:hover {
+  background-color: var(--primary-hover);
+}
+
+.button-group button:disabled {
+  background-color: var(--gray-300);
+  cursor: not-allowed;
+}
+
+.demo-section.dark .button-group button:disabled {
+  background-color: var(--gray-600);
+}
+
+.button-group button.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.625rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+}
+
+.demo-section.dark .form-group input,
+.demo-section.dark .form-group textarea,
+.demo-section.dark .form-group select {
+  background-color: var(--gray-800);
+  border-color: var(--gray-600);
+  color: var(--text-dark);
+}
+
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.input-group input {
+  flex: 1;
+}
+
+/* List Styles */
+.data-list,
+.notes-list,
+.users-list {
+  list-style: none;
+  margin: 1rem 0;
+}
+
+.data-list li,
+.notes-list li,
+.users-list li {
+  padding: 0.75rem;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--border-radius);
+  margin-bottom: 0.5rem;
+}
+
+.demo-section.dark .data-list li,
+.demo-section.dark .notes-list li,
+.demo-section.dark .users-list li {
+  border-color: var(--gray-600);
+}
+
+.notes-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notes-list li button {
+  background-color: var(--error);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.note-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.note-input input {
+  flex: 1;
+  padding: 0.625rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+}
+
+.demo-section.dark .note-input input {
+  background-color: var(--gray-800);
+  border-color: var(--gray-600);
+  color: var(--text-dark);
+}
+
+.note-input button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.no-notes {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--gray-100);
+  border-radius: var(--border-radius);
+  color: var(--gray-600);
+}
+
+.demo-section.dark .no-notes {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--gray-300);
+}
+
+/* Timer Styles */
+.timer {
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  background-color: var(--gray-100);
+  margin-bottom: 1rem;
+}
+
+.demo-section.dark .timer {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Code Example Styles */
+.code-example {
+  margin: 1rem 0;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.code-example pre {
+  padding: 1rem;
+  font-size: 0.875rem;
+  background-color: var(--gray-800);
+  color: white;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+/* Loading and Error States */
+.loading {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.error-message {
+  padding: 0.75rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--error);
+  margin-bottom: 1rem;
+}
+
+.error-message p {
+  color: var(--error);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .content {
+    margin-left: 200px;
+    padding: 1rem;
+  }
+
+  .demo-section {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    padding: 1rem;
+  }
+
+  .sidebar-nav {
+    margin-bottom: 1rem;
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .button-group {
+    flex-wrap: wrap;
+  }
+}
