@@ -1,4 +1,4 @@
-import { Route, Routes, Outlet, Link } from "react-router-dom";
+import { Route, Routes, Outlet, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import LandingPage from "./LandingPage";
@@ -24,6 +24,7 @@ import DiscountedProducts from "./DiscountedProducts";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Check if user is logged in
@@ -34,12 +35,13 @@ function App() {
   }, []);
 
   const handleLogin = () => {
-    localStorage.setItem("user", "user123");
+    localStorage.setItem("user", "lavi");
     setIsLoggedIn(true);
   };
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    navigate("/");
     setIsLoggedIn(false);
   };
 
@@ -68,6 +70,7 @@ function App() {
           <Route path="new" element={<NewProducts />} />
           <Route path="discounted" element={<DiscountedProducts />} />
         </Route>
+        {/* /disoun */}
 
         {/* Protected routes */}
         {/* <Route element={<ProtectedRoute />}> */}

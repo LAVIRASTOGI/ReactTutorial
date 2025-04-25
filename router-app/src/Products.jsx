@@ -11,6 +11,7 @@ function Products() {
       </div>
 
       <div className="products-nav">
+        {/* /products/featured */}
         <Link to="featured" className="product-nav-item">
           <div className="product-nav-icon">✨</div>
           <span>Featured</span>

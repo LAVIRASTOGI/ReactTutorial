@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState("lavi@example.com");
-  const [password, setPassword] = useState("lavi");
+  const [password, setPassword] = useState("Lavi1993@");
   const [error, setError] = useState("");
   const navigate = useNavigate();
   //const location = useLocation();
@@ -20,10 +20,10 @@ function Login({ onLogin }) {
     }
 
     // Simple validation - in a real app you would check credentials with a server
-    if (email === "lavi@example.com" && password === "lavi") {
+    if (email === "lavi@example.com" && password === "Lavi1993@") {
       onLogin();
-      // Redirect to the page they were trying to visit before being sent to login
-      navigate("/users");
+
+      navigate("/");
     } else {
       setError("Invalid credentials. Try lavi@example.com / lavi");
     }

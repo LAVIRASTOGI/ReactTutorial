@@ -89,30 +89,6 @@ function SearchWithParams() {
   return (
     <div className="query-params-demo">
       <h2>Search with Query Parameters</h2>
-      <p>
-        This example demonstrates handling query parameters in React Router.
-      </p>
-
-      <div className="current-params">
-        <h3>Current URL Parameters:</h3>
-        <ul>
-          <li>
-            <strong>Search Query (q):</strong> {query || "None"}
-          </li>
-          <li>
-            <strong>Category:</strong> {category}
-          </li>
-          <li>
-            <strong>Sort By:</strong> {sortBy}
-          </li>
-        </ul>
-        <p className="url-display">
-          Current URL:{" "}
-          <code>
-            /search-params?q={query}&category={category}&sort={sortBy}
-          </code>
-        </p>
-      </div>
 
       <div className="search-form">
         <form onSubmit={handleSearch}>
