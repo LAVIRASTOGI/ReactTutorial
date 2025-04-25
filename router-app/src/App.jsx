@@ -70,13 +70,13 @@ function App() {
         </Route>
 
         {/* Protected routes */}
-        <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
-          <Route path="users" element={<Users />} />
-          <Route path="users/:id" element={<UserDetails />} />
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="search" element={<Search />} />
-        </Route>
+        {/* <Route element={<ProtectedRoute />}> */}
+        <Route path="users" element={<Users />} />
+        <Route path="users/:id" element={<UserDetails />} />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="search" element={<Search />} />
+        {/* </Route> */}
 
         {/* 404 page */}
         <Route path="*" element={<NotFound />} />

@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login({ onLogin }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("lavi@example.com");
+  const [password, setPassword] = useState("lavi");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
+  //const location = useLocation();
 
   // Get the redirect path from location state, defaulting to "/users" if none exists
-  const from = location.state?.from || "/users";
+  //const from = location.state?.from || "/users";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ function Login({ onLogin }) {
     if (email === "lavi@example.com" && password === "lavi") {
       onLogin();
       // Redirect to the page they were trying to visit before being sent to login
-      navigate(from);
+      navigate("/users");
     } else {
       setError("Invalid credentials. Try lavi@example.com / lavi");
     }
@@ -32,11 +32,11 @@ function Login({ onLogin }) {
   return (
     <div className="login-form">
       <h2>Log In</h2>
-      {from !== "/users" && (
+      {/* {from !== "/users" && (
         <div className="redirect-notice">
           You need to log in to access <strong>{from}</strong>
         </div>
-      )}
+      )} */}
       {error && <div className="alert alert-error">{error}</div>}
 
       <form onSubmit={handleSubmit}>

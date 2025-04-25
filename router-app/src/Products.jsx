@@ -11,17 +11,17 @@ function Products() {
       </div>
 
       <div className="products-nav">
-        <Link to="/products/featured" className="product-nav-item">
+        <Link to="featured" className="product-nav-item">
           <div className="product-nav-icon">✨</div>
           <span>Featured</span>
         </Link>
 
-        <Link to="/products/new" className="product-nav-item">
+        <Link to="new" className="product-nav-item">
           <div className="product-nav-icon">🆕</div>
           <span>New Arrivals</span>
         </Link>
 
-        <Link to="/products/discounted" className="product-nav-item">
+        <Link to="discounted" className="product-nav-item">
           <div className="product-nav-icon">🏷️</div>
           <span>On Sale</span>
         </Link>
