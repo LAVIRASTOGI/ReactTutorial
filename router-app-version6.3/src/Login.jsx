@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState("lavi@example.com");
   const [password, setPassword] = useState("Lavi1993@");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  //const location = useLocation();
+  const location = useLocation();
 
   // Get the redirect path from location state, defaulting to "/users" if none exists
-  //const from = location.state?.from || "/users";
+  const from = location.state?.from || "/";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,8 +22,8 @@ function Login({ onLogin }) {
     // Simple validation - in a real app you would check credentials with a server
     if (email === "lavi@example.com" && password === "Lavi1993@") {
       onLogin();
-
-      navigate("/");
+      navigate(from, { replace: true });
+      // navigate("/");
     } else {
       setError("Invalid credentials. Try lavi@example.com / lavi");
     }

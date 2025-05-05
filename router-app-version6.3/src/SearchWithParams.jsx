@@ -3,6 +3,10 @@ import { useSearchParams, Link } from "react-router-dom";
 import "./QueryParamsStyles.css";
 
 function SearchWithParams() {
+  //example of search with query params
+  // /search-params?q=laptop&category=electronics&sort=price_asc
+  // /search-params?q=laptop&category=electronics&sort=price_desc
+
   // Get and set the query parameters
   const [searchParams, setSearchParams] = useSearchParams();
 
