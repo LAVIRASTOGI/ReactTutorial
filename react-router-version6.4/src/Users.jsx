@@ -4,10 +4,6 @@ import "./App.css";
 function Users() {
   const users = useLoaderData();
 
-  // if (loading) {
-  //   return <div className="card">Loading users...</div>;
-  // }
-
   return (
     <>
       <h1>Users</h1>
