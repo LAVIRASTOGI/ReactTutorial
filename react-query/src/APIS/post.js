@@ -1,7 +1,7 @@
 export const getPosts = async () => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 4000));
-    const response = await fetch("https://jsonplaceholder.typicode.com/post");
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
     if (!response.ok) {
       throw new Error("Failed to fetch posts. Please try again later.");
     } else {
