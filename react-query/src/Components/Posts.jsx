@@ -1,5 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getPosts } from "../APIS/post";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 /**
  * useQuery Options Reference Table:
@@ -26,19 +28,155 @@ import { getPosts } from "../APIS/post";
  * | structuralSharing    | boolean                | true             | Reduces unnecessary re-renders by comparing data      |
  * ---------------------------------------------------------------------
  */
-export const Posts = () => {
+
+// refetchOnWindowFocus: true,
+// refetchOnMount: true,
+// refetchOnReconnect: true,
+// retry: false,
+// staleTime: 60000, // 1 minute,
+// cacheTime: 60000, // 1 minute,
+
+// refreshbackgroud: true,
+// refetchInterval: 60000, // 1 minute,
+// refectchIntveralInBackground: 60000 ,
+// refetchIntervalInBackground: true,
+// refetchOnFocus: true,
+// refetchOnReconnect: true,
+// refetchOnMount: true,
+
+const Posts = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10;
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["posts"],
-    queryFn: getPosts,
-    retry: false, // Disable automatic retries
+    queryKey: ["posts", currentPage],
+    queryFn: () => getPosts(currentPage, postsPerPage),
+    retry: false,
+    refetchInterval: 60000,
+    refetchIntervalInBackground: true,
+    // staleTime: 60000, // 1 minute,
+    //  show previous data when new data is loading
+    placeholderData: keepPreviousData,
   });
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  console.log(data);
+
+  if (isLoading)
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Loading posts...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="error-container">
+        <h2>Error Loading Posts</h2>
+        <p>{error.message}</p>
+        <button
+          className="btn btn-primary"
+          onClick={() => window.location.reload()}
+        >
+          Try Again
+        </button>
+      </div>
+    );
+
+  // Filter posts based on search term
+  const filteredPosts = data?.filter(
+    (post) =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.body.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div>
-      {data?.length > 0 &&
-        data?.map((post) => <div key={post.id}>{post.title}</div>)}
+    <div className="posts-container">
+      <div className="posts-header">
+        <h1>Blog Posts</h1>
+        <p>Explore our collection of {filteredPosts?.length} posts</p>
+
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search posts..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="search-input"
+          />
+          {searchTerm && (
+            <button
+              className="clear-search"
+              onClick={() => {
+                setSearchTerm("");
+                setCurrentPage(1);
+              }}
+            >
+              ✕
+            </button>
+          )}
+        </div>
+      </div>
+
+      {filteredPosts?.length === 0 ? (
+        <div className="no-results">
+          <h2>No posts found</h2>
+          <p>Try adjusting your search term</p>
+        </div>
+      ) : (
+        <>
+          <div className="posts-grid">
+            {data?.map((post) => (
+              <Link
+                to={`/posts/${post.id}`}
+                key={post.id}
+                className="post-card"
+              >
+                <h2 className="post-title">{post.title}</h2>
+                <p className="post-excerpt">
+                  {post.body.substring(0, 100)}
+                  {post.body.length > 100 ? "..." : ""}
+                </p>
+                <div className="post-footer">
+                  <span className="post-author">Post {post.id}</span>
+                  <span className="post-read-more">Read more →</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="pagination">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="pagination-button"
+            >
+              &laquo; Previous
+            </button>
+
+            <div className="page-numbers">
+              <h4> {currentPage} </h4>
+            </div>
+
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              // disabled={currentPage === totalPages}
+              className="pagination-button"
+            >
+              Next &raquo;
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
+
+export default Posts;
