@@ -33,6 +33,11 @@ function AppLayout() {
     navigate("/");
   };
 
+  // 2 navigation states
+  // 1. idle
+  // 2. loading
+  // 3. submitting
+
   if (navigation.state === "loading") {
     return (
       <div className="loading-spinner">

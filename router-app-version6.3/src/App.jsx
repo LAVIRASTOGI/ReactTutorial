@@ -1,5 +1,5 @@
 import { Route, Routes, Outlet, Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy } from "react";
 
 import LandingPage from "./LandingPage";
 import About from "./About";
@@ -20,7 +20,8 @@ import Products from "./Products";
 import ProductIndex from "./ProductIndex";
 import FeaturedProducts from "./FeaturedProducts";
 import NewProducts from "./NewProducts";
-import DiscountedProducts from "./DiscountedProducts";
+
+const DiscountedProducts = lazy(() => import("./DiscountedProducts"));
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

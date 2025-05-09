@@ -1,65 +1,31 @@
-import { useState } from "react";
+import { Form, useActionData, useNavigation } from "react-router-dom";
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [status, setStatus] = useState(null);
+  // Get form submission results from the action
+  const actionData = useActionData();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  // Get current navigation state (idle, loading, submitting)
+  const navigation = useNavigation();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Simple validation
-    if (!formData.name || !formData.email || !formData.message) {
-      setStatus({
-        success: false,
-        message: "Please fill in all fields",
-      });
-      return;
-    }
-
-    // In a real app, you would send the data to a server
-    // For this demo, we'll just simulate success
-    setStatus({
-      success: true,
-      message: "Message sent successfully! We'll get back to you soon.",
-    });
-
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
-  };
+  // Check if the form is currently being submitted
+  const isSubmitting = navigation.state === "submitting";
 
   return (
     <div>
       <h1>Contact Us</h1>
       <p>Have questions or feedback? We'd love to hear from you!</p>
 
-      {status && (
-        <div
-          className={`alert ${
-            status.success ? "alert-success" : "alert-error"
-          }`}
-        >
-          {status.message}
-        </div>
+      {actionData?.success && (
+        <div className="alert alert-success">{actionData.message}</div>
+      )}
+
+      {actionData?.error && (
+        <div className="alert alert-error">{actionData.error}</div>
       )}
 
       <div className="card">
-        <form onSubmit={handleSubmit}>
+        {/* Using Form from react-router-dom instead of regular form */}
+        <Form method="post" action="/contact">
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -67,9 +33,8 @@ function Contact() {
               id="name"
               name="name"
               className="form-control"
-              value={formData.name}
-              onChange={handleChange}
               placeholder="Your name"
+              required
             />
           </div>
 
@@ -80,9 +45,8 @@ function Contact() {
               id="email"
               name="email"
               className="form-control"
-              value={formData.email}
-              onChange={handleChange}
               placeholder="Your email address"
+              required
             />
           </div>
 
@@ -93,15 +57,16 @@ function Contact() {
               name="message"
               className="form-control"
               rows="6"
-              value={formData.message}
-              onChange={handleChange}
               placeholder="Your message"
               style={{ resize: "vertical" }}
+              required
             ></textarea>
           </div>
 
-          <button type="submit">Send Message</button>
-        </form>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Sending..." : "Send Message"}
+          </button>
+        </Form>
       </div>
 
       <div className="card" style={{ marginTop: "2rem" }}>

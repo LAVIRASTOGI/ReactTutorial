@@ -16,9 +16,19 @@ import Products from "./Products";
 import ProductIndex from "./ProductIndex";
 import FeaturedProducts from "./FeaturedProducts";
 import NewProducts from "./NewProducts";
-import DiscountedProducts from "./DiscountedProducts";
 import AppLayout from "./AppLayout";
-import { fetchUser, fetchUserById } from "./api/fetchUser";
+import { contactAction, fetchUser, fetchUserById } from "./api/fetchUser";
+
+// v6.4 introduces Data Routers
+// createBrowserRouter creates a "Data Router" that:
+// 1. Supports loaders: Fetch data before rendering a route
+// 2. Supports errorElement: Show fallback UI when loaders or actions throw errors
+// 3. Supports lazy loading: Load components on-demand for better performance
+// 4. Supports nested loaders: Load data at multiple route levels simultaneously
+// 5. Supports nested actions: Handle form submissions/mutations from a route
+
+// Create a new data router that manages the application
+// path via history.pushState and history.replaceState.
 
 function App() {
   const router = createBrowserRouter([
@@ -67,6 +77,7 @@ function App() {
         {
           path: "/contact",
           element: <Contact />,
+          action: contactAction, // Add the action function for form processing
         },
         {
           path: "/search-params",
@@ -90,7 +101,17 @@ function App() {
             },
             {
               path: "/products/discounted",
-              element: <DiscountedProducts />,
+              lazy: () =>
+                import("./DiscountedProducts").then((module) => ({
+                  //The module object returned by import()
+                  //	We are returning an object with a key named Component
+                  //module.default	The default export from DiscountedProducts.js
+                  //Component	We assign it to key named Component
+                  Component: module.default,
+
+                  // if not default name
+                  //  Component: module.DiscountedProducts,
+                })),
             },
           ],
         },
@@ -100,6 +121,7 @@ function App() {
 
   return (
     <>
+      {/*  (activates) your router configuration. */}
       <RouterProvider router={router} />
     </>
   );
