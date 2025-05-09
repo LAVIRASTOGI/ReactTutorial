@@ -4,54 +4,20 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { deletePost, getPosts } from "../APIS/post";
+import { createPost, deletePost, getPosts } from "../APIS/post";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-/**
- * useQuery Options Reference Table:
- * ---------------------------------------------------------------------
- * | Option                | Type                  | Default          | Description                                           |
- * |----------------------|------------------------|------------------|-------------------------------------------------------|
- * | queryKey             | string or array        | required         | Unique key to identify and cache the query            |
- * | queryFn              | function               | required         | Function that returns a Promise (fetches the data)    |
- * | enabled              | boolean                | true             | Enables or disables automatic query execution         |
- * | staleTime            | number (ms)            | 0                | Time before data is considered stale                  |
- * | cacheTime            | number (ms)            | 300000 (5 min)   | Time unused cache stays in memory                     |
- * | refetchOnWindowFocus | boolean or 'always'    | true             | Refetch when window regains focus                     |
- * | refetchOnMount       | boolean or 'always'    | true             | Refetch on component mount                            |
- * | refetchOnReconnect   | boolean                | true             | Refetch when network reconnects                       |
- * | retry                | boolean/number/function| 3                | Number of retry attempts on failure                   |
- * | retryDelay           | number or function     | 1000 ms          | Delay between retries                                 |
- * | select               | function               | undefined        | Transform/filter data before returning to component   |
- * | placeholderData      | any                    | undefined        | Placeholder data shown while loading                  |
- * | initialData          | any or function        | undefined        | Initial data for the first render                     |
- * | suspense             | boolean                | false            | Enable React Suspense for handling loading states     |
- * | onSuccess            | function               | undefined        | Callback on successful fetch                          |
- * | onError              | function               | undefined        | Callback on error                                     |
- * | onSettled            | function               | undefined        | Callback after either success or error                |
- * | structuralSharing    | boolean                | true             | Reduces unnecessary re-renders by comparing data      |
- * ---------------------------------------------------------------------
- */
-
-// refetchOnWindowFocus: true,
-// refetchOnMount: true,
-// refetchOnReconnect: true,
-// retry: false,
-// staleTime: 60000, // 1 minute,
-// cacheTime: 60000, // 1 minute,
-
-// refreshbackgroud: true,
-// refetchInterval: 60000, // 1 minute,
-// refectchIntveralInBackground: 60000 ,
-// refetchIntervalInBackground: true,
-// refetchOnFocus: true,
-// refetchOnReconnect: true,
-// refetchOnMount: true,
+// import PostModal from "./PostModal";
 
 const Posts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newPost, setNewPost] = useState({
+    title: "",
+    body: "",
+    userId: 1,
+  });
   const postsPerPage = 10;
   const queryClient = useQueryClient();
 
@@ -61,18 +27,13 @@ const Posts = () => {
     retry: false,
     refetchInterval: 60000,
     refetchIntervalInBackground: true,
-    // staleTime: 60000, // 1 minute,
-    //  show previous data when new data is loading
     placeholderData: keepPreviousData,
   });
 
-  const mutationFn = useMutation({
+  const deleteMutation = useMutation({
     mutationFn: (id) => deletePost(id),
     onSuccess: (data, id) => {
       console.log("data", data, id);
-
-      // invalidate queries - get new data from server
-      // queryClient.invalidateQueries({ queryKey: ["posts", currentPage] });
 
       // update the data in the cache
       queryClient.setQueryData(["posts", currentPage], (old) => {
@@ -81,6 +42,25 @@ const Posts = () => {
     },
     onError: (error) => {
       console.log(error);
+    },
+  });
+
+  const createMutation = useMutation({
+    mutationFn: (postData) => createPost(postData),
+    onSuccess: (data) => {
+      console.log("Post created:", data);
+
+      // Update cache with new post
+      queryClient.setQueryData(["posts", currentPage], (old) => {
+        return [data, ...old];
+      });
+
+      // Close modal and reset form
+      setIsModalOpen(false);
+      setNewPost({ title: "", body: "", userId: 1 });
+    },
+    onError: (error) => {
+      console.log("Error creating post:", error);
     },
   });
 
@@ -122,8 +102,29 @@ const Posts = () => {
     e.preventDefault(); // Prevent navigation to post detail
     e.stopPropagation(); // Prevent event bubbling
     console.log(`Delete post with ID: ${postId}`);
-    mutationFn.mutate(postId);
-    // Here you would add the actual delete functionality
+    deleteMutation.mutate(postId);
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setNewPost({ title: "", body: "", userId: 1 });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewPost((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createMutation.mutate(newPost);
   };
 
   return (
@@ -133,7 +134,10 @@ const Posts = () => {
         <p>Explore our collection of {filteredPosts?.length} posts</p>
 
         {/* Add New Post Button */}
-        <button className="btn btn-primary add-post-btn">
+        <button
+          className="btn btn-primary add-post-btn"
+          onClick={handleOpenModal}
+        >
           <span className="add-icon">+</span> Add New Post
         </button>
 
@@ -209,13 +213,66 @@ const Posts = () => {
 
             <button
               onClick={() => handlePageChange(currentPage + 1)}
-              // disabled={currentPage === totalPages}
               className="pagination-button"
             >
               Next &raquo;
             </button>
           </div>
         </>
+      )}
+
+      {/* Modal for adding new post */}
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2>Add New Post</h2>
+              <button className="modal-close" onClick={handleCloseModal}>
+                ×
+              </button>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="title">Title</label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  value={newPost.title}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="body">Content</label>
+                <textarea
+                  id="body"
+                  name="body"
+                  rows="6"
+                  value={newPost.body}
+                  onChange={handleInputChange}
+                  required
+                ></textarea>
+              </div>
+              <div className="modal-actions">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleCloseModal}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={createMutation.isPending}
+                >
+                  {createMutation.isPending ? "Creating..." : "Create Post"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
     </div>
   );

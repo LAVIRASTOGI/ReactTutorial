@@ -39,22 +39,33 @@ export const getPost = async (id) => {
 };
 
 export const createPost = async (post) => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-    method: "POST",
-    body: JSON.stringify(post),
-  });
-  return response.json();
+  // const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+  //   method: "POST",
+  //   body: JSON.stringify(post),
+  // });
+  // return response.json();
+  let newPostsData = { ...post, id: posts?.length + 1 };
+  //  const newPosts = [newPostsData, ...posts];
+  return newPostsData;
 };
 
-export const updatePost = async (id, post) => {
-  const response = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${id}`,
-    {
-      method: "PUT",
-      body: JSON.stringify(post),
+export const updatePost = async (id, postData) => {
+  // const response = await fetch(
+  //   `https://jsonplaceholder.typicode.com/posts/${id}`,
+  //   {
+  //     method: "PUT",
+  //     body: JSON.stringify(post),
+  //   }
+  // );
+  // return response.json();
+  let newPostsData = { ...postData, id: Math.floor(Math.random() * 1000) };
+  const newPosts = posts.map((post) => {
+    if (post.id === parseInt(id)) {
+      return newPostsData;
     }
-  );
-  return response.json();
+    return post;
+  });
+  return newPosts;
 };
 
 export const deletePost = async (id) => {
