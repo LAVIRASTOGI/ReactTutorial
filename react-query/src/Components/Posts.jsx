@@ -4,16 +4,17 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { createPost, deletePost, getPosts } from "../APIS/post";
+import { createPost, deletePost, getPosts, updatePost } from "../APIS/post";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import PostModal from "./PostModal";
 
 const Posts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newPost, setNewPost] = useState({
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [postData, setPostData] = useState({
+    id: null,
     title: "",
     body: "",
     userId: 1,
@@ -56,11 +57,30 @@ const Posts = () => {
       });
 
       // Close modal and reset form
-      setIsModalOpen(false);
-      setNewPost({ title: "", body: "", userId: 1 });
+      handleCloseModal();
     },
     onError: (error) => {
       console.log("Error creating post:", error);
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: ({ id, postData }) => updatePost(id, postData),
+    onSuccess: (data, variables) => {
+      console.log("Post updated:", data);
+
+      // Update cache with updated post
+      queryClient.setQueryData(["posts", currentPage], (old) => {
+        return old.map((post) =>
+          post.id === variables.id ? { ...post, ...variables.postData } : post
+        );
+      });
+
+      // Close modal and reset form
+      handleCloseModal();
+    },
+    onError: (error) => {
+      console.log("Error updating post:", error);
     },
   });
 
@@ -105,18 +125,45 @@ const Posts = () => {
     deleteMutation.mutate(postId);
   };
 
-  const handleOpenModal = () => {
+  const handleOpenCreateModal = () => {
+    setIsEditMode(false);
+    setPostData({
+      id: null,
+      title: "",
+      body: "",
+      userId: 1,
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleOpenUpdateModal = (e, post) => {
+    e.preventDefault(); // Prevent navigation to post detail
+    e.stopPropagation(); // Prevent event bubbling
+
+    setIsEditMode(true);
+    setPostData({
+      id: post.id,
+      title: post.title,
+      body: post.body,
+      userId: post.userId || 1,
+    });
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setNewPost({ title: "", body: "", userId: 1 });
+    setIsEditMode(false);
+    setPostData({
+      id: null,
+      title: "",
+      body: "",
+      userId: 1,
+    });
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewPost((prev) => ({
+    setPostData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -124,8 +171,23 @@ const Posts = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createMutation.mutate(newPost);
+
+    if (isEditMode) {
+      const postDataWithoutId = {
+        title: postData.title,
+        body: postData.body,
+        userId: postData.userId,
+      };
+      updateMutation.mutate({
+        id: postData.id,
+        postData: postDataWithoutId,
+      });
+    } else {
+      createMutation.mutate(postData);
+    }
   };
+
+  const isPending = createMutation.isPending || updateMutation.isPending;
 
   return (
     <div className="posts-container">
@@ -136,7 +198,7 @@ const Posts = () => {
         {/* Add New Post Button */}
         <button
           className="btn btn-primary add-post-btn"
-          onClick={handleOpenModal}
+          onClick={handleOpenCreateModal}
         >
           <span className="add-icon">+</span> Add New Post
         </button>
@@ -187,13 +249,22 @@ const Posts = () => {
                     <span className="post-read-more">Read more →</span>
                   </div>
                 </Link>
-                {/* Delete Button */}
-                <button
-                  className="btn btn-delete"
-                  onClick={(e) => handleDelete(e, post.id)}
-                >
-                  Delete
-                </button>
+                <div className="post-actions">
+                  {/* Update Button */}
+                  <button
+                    className="btn btn-update"
+                    onClick={(e) => handleOpenUpdateModal(e, post)}
+                  >
+                    Update
+                  </button>
+                  {/* Delete Button */}
+                  <button
+                    className="btn btn-delete"
+                    onClick={(e) => handleDelete(e, post.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -221,12 +292,12 @@ const Posts = () => {
         </>
       )}
 
-      {/* Modal for adding new post */}
+      {/* Modal for adding/updating post */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
             <div className="modal-header">
-              <h2>Add New Post</h2>
+              <h2>{isEditMode ? "Update Post" : "Add New Post"}</h2>
               <button className="modal-close" onClick={handleCloseModal}>
                 ×
               </button>
@@ -238,7 +309,7 @@ const Posts = () => {
                   type="text"
                   id="title"
                   name="title"
-                  value={newPost.title}
+                  value={postData.title}
                   onChange={handleInputChange}
                   required
                 />
@@ -249,7 +320,7 @@ const Posts = () => {
                   id="body"
                   name="body"
                   rows="6"
-                  value={newPost.body}
+                  value={postData.body}
                   onChange={handleInputChange}
                   required
                 ></textarea>
@@ -265,9 +336,15 @@ const Posts = () => {
                 <button
                   type="submit"
                   className="btn btn-primary"
-                  disabled={createMutation.isPending}
+                  disabled={isPending}
                 >
-                  {createMutation.isPending ? "Creating..." : "Create Post"}
+                  {isPending
+                    ? isEditMode
+                      ? "Updating..."
+                      : "Creating..."
+                    : isEditMode
+                    ? "Update Post"
+                    : "Create Post"}
                 </button>
               </div>
             </form>

@@ -58,13 +58,14 @@ export const updatePost = async (id, postData) => {
   //   }
   // );
   // return response.json();
-  let newPostsData = { ...postData, id: Math.floor(Math.random() * 1000) };
+  let newPostsData = { ...postData };
   const newPosts = posts.map((post) => {
     if (post.id === parseInt(id)) {
       return newPostsData;
     }
     return post;
   });
+  console.log(newPosts);
   return newPosts;
 };
 
