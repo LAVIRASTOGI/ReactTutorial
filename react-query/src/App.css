@@ -448,6 +448,10 @@
   margin-bottom: 3rem;
 }
 
+.post-card-wrapper {
+  position: relative;
+}
+
 .post-card {
   background-color: var(--card-bg);
   border-radius: 12px;
@@ -465,6 +469,39 @@
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   border-color: var(--primary-color);
+}
+
+.btn-delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--error-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 10;
+}
+
+.btn-delete:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.add-post-btn {
+  margin: 1rem auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.add-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .post-title {

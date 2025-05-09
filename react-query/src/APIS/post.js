@@ -56,3 +56,15 @@ export const updatePost = async (id, post) => {
   );
   return response.json();
 };
+
+export const deletePost = async (id) => {
+  // const response = await fetch(
+  //   `https://jsonplaceholder.typicode.com/posts/${id}`,
+  //   { method: "DELETE" }
+  // );
+  // return response.json();
+
+  const newPosts = posts.filter((post) => post.id !== parseInt(id));
+  // console.log(newPosts);
+  return newPosts;
+};

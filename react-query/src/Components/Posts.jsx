@@ -1,5 +1,10 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { getPosts } from "../APIS/post";
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { deletePost, getPosts } from "../APIS/post";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -48,6 +53,7 @@ const Posts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10;
+  const queryClient = useQueryClient();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["posts", currentPage],
@@ -58,6 +64,24 @@ const Posts = () => {
     // staleTime: 60000, // 1 minute,
     //  show previous data when new data is loading
     placeholderData: keepPreviousData,
+  });
+
+  const mutationFn = useMutation({
+    mutationFn: (id) => deletePost(id),
+    onSuccess: (data, id) => {
+      console.log("data", data, id);
+
+      // invalidate queries - get new data from server
+      // queryClient.invalidateQueries({ queryKey: ["posts", currentPage] });
+
+      // update the data in the cache
+      queryClient.setQueryData(["posts", currentPage], (old) => {
+        return old.filter((post) => post.id !== id);
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+    },
   });
 
   if (isLoading)
@@ -94,11 +118,24 @@ const Posts = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleDelete = (e, postId) => {
+    e.preventDefault(); // Prevent navigation to post detail
+    e.stopPropagation(); // Prevent event bubbling
+    console.log(`Delete post with ID: ${postId}`);
+    mutationFn.mutate(postId);
+    // Here you would add the actual delete functionality
+  };
+
   return (
     <div className="posts-container">
       <div className="posts-header">
         <h1>Blog Posts</h1>
         <p>Explore our collection of {filteredPosts?.length} posts</p>
+
+        {/* Add New Post Button */}
+        <button className="btn btn-primary add-post-btn">
+          <span className="add-icon">+</span> Add New Post
+        </button>
 
         <div className="search-container">
           <input
@@ -134,21 +171,26 @@ const Posts = () => {
         <>
           <div className="posts-grid">
             {data?.map((post) => (
-              <Link
-                to={`/posts/${post.id}`}
-                key={post.id}
-                className="post-card"
-              >
-                <h2 className="post-title">{post.title}</h2>
-                <p className="post-excerpt">
-                  {post.body.substring(0, 100)}
-                  {post.body.length > 100 ? "..." : ""}
-                </p>
-                <div className="post-footer">
-                  <span className="post-author">Post {post.id}</span>
-                  <span className="post-read-more">Read more →</span>
-                </div>
-              </Link>
+              <div key={post.id} className="post-card-wrapper">
+                <Link to={`/posts/${post.id}`} className="post-card">
+                  <h2 className="post-title">{post.title}</h2>
+                  <p className="post-excerpt">
+                    {post.body.substring(0, 100)}
+                    {post.body.length > 100 ? "..." : ""}
+                  </p>
+                  <div className="post-footer">
+                    <span className="post-author">Post {post.id}</span>
+                    <span className="post-read-more">Read more →</span>
+                  </div>
+                </Link>
+                {/* Delete Button */}
+                <button
+                  className="btn btn-delete"
+                  onClick={(e) => handleDelete(e, post.id)}
+                >
+                  Delete
+                </button>
+              </div>
             ))}
           </div>
 
