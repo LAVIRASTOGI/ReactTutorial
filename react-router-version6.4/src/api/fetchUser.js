@@ -1,5 +1,10 @@
 export const fetchUser = async () => {
   try {
+    await new Promise((res) => {
+      setTimeout(() => {
+        res("resolved");
+      }, 1000);
+    });
     const response = await fetch("https://jsonplaceholder.typicode.com/users");
     const data = await response.json();
     return data;
@@ -11,6 +16,11 @@ export const fetchUser = async () => {
 
 export const fetchUserById = async (id) => {
   try {
+    await new Promise((res) => {
+      setTimeout(() => {
+        res("resolved");
+      }, 1000);
+    });
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/users/${id}`
     );
