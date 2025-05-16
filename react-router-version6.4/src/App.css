@@ -513,3 +513,65 @@ input:invalid, textarea:invalid {
     transform: scale(1);
   }
 }
+/* Error Page Styles */
+.not-found {
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.not-found h1 {
+  font-size: 6rem;
+  margin-bottom: 1rem;
+  color: #3b82f6;
+}
+
+.not-found h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+.not-found p {
+  margin-bottom: 2rem;
+  color: #4b5563;
+}
+
+.error-details {
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+  text-align: left;
+  overflow-x: auto;
+}
+
+.error-details pre {
+  font-family: monospace;
+  font-size: 0.875rem;
+  color: #ef4444;
+  white-space: pre-wrap;
+}
+
+@media (prefers-color-scheme: dark) {
+  .not-found h1 {
+    color: #60a5fa;
+  }
+  
+  .not-found h2 {
+    color: #f3f4f6;
+  }
+  
+  .not-found p {
+    color: #d1d5db;
+  }
+  
+  .error-details {
+    background-color: #1f2937;
+  }
+  
+  .error-details pre {
+    color: #f87171;
+  }
+}

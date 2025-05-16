@@ -103,14 +103,14 @@ function App() {
               path: "/products/discounted",
               lazy: () =>
                 import("./DiscountedProducts").then((module) => ({
-                  //The module object returned by import()
+                  //  The module object returned by import()
                   //	We are returning an object with a key named Component
-                  //module.default	The default export from DiscountedProducts.js
-                  //Component	We assign it to key named Component
+                  //  module.default	The default export from DiscountedProducts.js
+                  //  Component	We assign it to key named Component
                   Component: module.default,
 
                   // if not default name
-                  //  Component: module.DiscountedProducts,
+                  // Component: module.DiscountedProducts,
                 })),
             },
           ],
